@@ -54,12 +54,12 @@ def login_admin():
         admin = loginAdmin(name,password)
         
         if admin:
-            return jsonify({'message':admin[1:3],'status':200})
+            return jsonify({'message':list(admin[1:3]),'status':200})
         else:
-            return jsonify({'message':'Invalid credentials','status':400})
+            return jsonify({'message':['Invalid credentials'],'status':400})
     
     except Exception as e:
-        return jsonify({'message':str(e), 'status':400})
+        return jsonify({'message':[str(e)], 'status':400})
     
 @app.route('/uploadLocation',methods=['POST'])
 def upload_location():
