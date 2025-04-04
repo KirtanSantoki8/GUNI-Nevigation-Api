@@ -56,7 +56,7 @@ def login_admin():
         if admin:
             return jsonify({'message':list(admin[1:3]),'status':200})
         else:
-            return jsonify({'message':['Invalid credentials'],'status':400})
+            return jsonify({'message':['Invalid credentials'],'status':200})
     
     except Exception as e:
         return jsonify({'message':[str(e)], 'status':400})
