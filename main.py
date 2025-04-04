@@ -54,7 +54,7 @@ def login_admin():
         admin = loginAdmin(name,password)
         
         if admin:
-            return jsonify({'message':admin,'status':200})
+            return jsonify({'message':admin[1:3],'status':200})
         else:
             return jsonify({'message':'Invalid credentials','status':400})
     
