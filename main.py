@@ -93,5 +93,4 @@ if __name__ == '__main__':
     dropTables()
     createTables()
     createAdmin("Admin","Admin@123")
-    addLocation("https://res-console.cloudinary.com/dzroteq7m/media_explorer_thumbnails/5702fe7111589012d23e648627397c6a/detailed","Location")
     app.run(debug=True)
