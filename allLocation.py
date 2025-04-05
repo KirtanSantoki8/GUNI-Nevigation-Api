@@ -18,3 +18,10 @@ def getAllLocation():
     locations = cur.fetchall()
     conn.close()
     return locations
+
+def writeMainLocation(name):
+    conn = sqlite3.connect('GUNI Nevigation.db')
+    cur = conn.cursor()
+    cur.execute('''INSERT INTO main_locations (main_location_names) VALUES (?)''',(name,))
+    conn.commit()
+    conn.close()

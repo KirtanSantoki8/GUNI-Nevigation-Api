@@ -27,13 +27,20 @@ def createTables():
                 date_of_location_creation DATE NOT NULL
                 )
             ''')
-    cur.execute('''CREATE TABLE IF NOT EXISTS location_details (
+    cur.execute('''CREATE TABLE IF NOT EXISTS main_locations (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                location_name VARCHAR(255) NOT NULL,
-                location_image VARCHAR(255) NOT NULL,
-                location_date_of_creation DATE NOT NULL
+                main_location_names VARCHAR(255) NOT NULL
                 )
             ''')
-    # cur.execute('''DROP TABLE IF EXISTS location''')
+    cur.execute('''CREATE TABLE IF NOT EXISTS sub_locations (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                sub_location_id VARCHAR(255) NOT NULL,
+                main_location_name VARCHAR(255) NOT NULL,
+                sub_location_thumbnail VARCHAR(255) NOT NULL,
+                sub_location_name VARCHAR(255) NOT NULL,
+                date_of_sub_location_creation DATE NOT NULL
+                )
+            ''')
+    # cur.execute('''DROP TABLE IF EXISTS location_details''')
     conn.commit()    
     conn.close()

@@ -4,9 +4,9 @@ from createUser import createUser
 from loginUser import loginUser
 from createAdmin import createAdmin
 from loginAdmin import loginAdmin
-from dropTable import dropTables
-from allLocation import addLocation , getAllLocation
+from allLocation import addLocation , getAllLocation , writeMainLocation
 from imageToUrl import getImage
+from allSubLocations import getAllMainLocations , uploadSubPlaces
 
 app = Flask(__name__)
 
@@ -70,6 +70,8 @@ def upload_location():
 
         thumbnail = getImage(image_data)
         location_id = addLocation(str(thumbnail),location)
+
+        writeMainLocation(location)
         
         return jsonify({'message':str(location_id),'status':200})
     
@@ -88,9 +90,36 @@ def get_all_location():
     
     except Exception as e:
         return jsonify({'message':str(e), 'status':400})
+    
+@app.route('/getAllMainLocations',methods=['GET'])
+def get_all_main_locations():
+    try:        
+        allMainLocations = getAllMainLocations()
+
+        if allMainLocations:
+            return jsonify({'message':allMainLocations,'status':200})
+        else:
+            return jsonify({'message':'No main locations found','status':400})
+    
+    except Exception as e:
+        return jsonify({'message':str(e), 'status':400})
+    
+@app.route('/uploadSubPlaces',methods=['POST'])
+def upload_sub_places():
+    try:
+        image = request.files['image']
+        image_data = image.read()
+        name = request.form['name']
+        mainLocation = request.form['mainLocation']
+
+        thumbnail = getImage(image_data)
+        sub_location_id = uploadSubPlaces(str(thumbnail),name,mainLocation)
+
+        return jsonify({'message':str(sub_location_id),'status':200})
+    
+    except Exception as e:
+        return jsonify({'message':str(e), 'status':400})
 
 if __name__ == '__main__':
-    dropTables()
     createTables()
-    createAdmin("Admin","Admin@123")
     app.run(debug=True)
