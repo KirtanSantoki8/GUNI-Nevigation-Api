@@ -5,7 +5,7 @@ from loginUser import loginUser
 from createAdmin import createAdmin
 from loginAdmin import loginAdmin
 from dropTable import dropTables
-from addLocation import addLocation
+from allLocation import addLocation , getAllLocation
 from imageToUrl import getImage
 
 app = Flask(__name__)
@@ -73,6 +73,19 @@ def upload_location():
         location_id = addLocation(thumbnail,location)
         
         return jsonify({'message':str(location_id),'status':200})
+    
+    except Exception as e:
+        return jsonify({'message':str(e), 'status':400})
+    
+@app.route('/getAllLocation',methods=['GET'])
+def get_all_location():
+    try:
+        locations = getAllLocation()
+        
+        if locations:
+            return jsonify({'message':locations,'status':200})
+        else:
+            return jsonify({'message':'No locations found','status':400})
     
     except Exception as e:
         return jsonify({'message':str(e), 'status':400})
