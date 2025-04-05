@@ -1,11 +1,13 @@
 import sqlite3
 import uuid
+from datetime import date
 
 def addLocation(image,name):
     conn = sqlite3.connect('GUNI Nevigation.db')
     cur = conn.cursor()
     location_id = str(uuid.uuid4())
-    cur.execute('''INSERT INTO location (location_id,location_thumbnail,location) VALUES (?,?,?)''',(location_id,image,name))
+    dateOfCreation = date.today()
+    cur.execute('''INSERT INTO location (location_id,location_thumbnail,location,date_of_location_creation) VALUES (?,?,?,?)''',(location_id,image,name,dateOfCreation))
     conn.commit()
     conn.close()
 
