@@ -69,7 +69,7 @@ def upload_location():
         location = request.form['location']
 
         thumbnail = getImage(image_data)
-
+        print(thumbnail)
         location_id = addLocation(thumbnail,location)
         
         return jsonify({'message':str(location_id),'status':200})
