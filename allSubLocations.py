@@ -18,3 +18,11 @@ def uploadSubPlaces(image,name,mainLocation):
     cur.execute('''INSERT INTO sub_locations (sub_location_id,main_location_name,sub_location_thumbnail,sub_location_name,date_of_sub_location_creation) VALUES (?,?,?,?,?)''',(sub_location_id,mainLocation,image,name,dateOfCreation))
     conn.commit()
     conn.close()
+
+def getSubLocations(mainLocation):
+    conn = sqlite3.connect('GUNI Nevigation.db')
+    cur = conn.cursor()
+    cur.execute('''SELECT * FROM sub_locations WHERE main_location_name = ?''',(mainLocation,))
+    locations = cur.fetchall()
+    conn.close()
+    return locations

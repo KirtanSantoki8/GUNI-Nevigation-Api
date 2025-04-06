@@ -6,7 +6,7 @@ from createAdmin import createAdmin
 from loginAdmin import loginAdmin
 from allLocation import addLocation , getAllLocation , writeMainLocation
 from imageToUrl import getImage
-from allSubLocations import getAllMainLocations , uploadSubPlaces
+from allSubLocations import getAllMainLocations , uploadSubPlaces , getSubLocations
 
 app = Flask(__name__)
 
@@ -116,6 +116,21 @@ def upload_sub_places():
         sub_location = uploadSubPlaces(str(thumbnail),name,mainLocation)
 
         return jsonify({'message':str(sub_location),'status':200})
+    
+    except Exception as e:
+        return jsonify({'message':str(e), 'status':400})
+    
+@app.route('/getSubLocations',methods=['POST'])
+def get_sub_locations():
+    try:
+        mainLocation = request.form['mainLocation']
+
+        subLocations = getSubLocations(mainLocation)
+
+        if subLocations:
+            return jsonify({'message':subLocations,'status':200})
+        else:
+            return jsonify({'message':'No sub locations found','status':400})
     
     except Exception as e:
         return jsonify({'message':str(e), 'status':400})
