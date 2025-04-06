@@ -109,7 +109,7 @@ def upload_sub_places():
     try:
         image = request.files['image']
         image_data = image.read()
-        name = request.form['name']
+        name = request.form['subLocation']
         mainLocation = request.form['mainLocation']
 
         thumbnail = getImage(image_data)
