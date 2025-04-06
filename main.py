@@ -69,11 +69,11 @@ def upload_location():
         location = request.form['location']
 
         thumbnail = getImage(image_data)
-        location_id = addLocation(str(thumbnail),location)
+        locations = addLocation(str(thumbnail),location)
 
         writeMainLocation(location)
         
-        return jsonify({'message':str(location_id),'status':200})
+        return jsonify({'message':str(locations),'status':200})
     
     except Exception as e:
         return jsonify({'message':str(e), 'status':400})
@@ -113,9 +113,9 @@ def upload_sub_places():
         mainLocation = request.form['mainLocation']
 
         thumbnail = getImage(image_data)
-        sub_location_id = uploadSubPlaces(str(thumbnail),name,mainLocation)
+        sub_location = uploadSubPlaces(str(thumbnail),name,mainLocation)
 
-        return jsonify({'message':str(sub_location_id),'status':200})
+        return jsonify({'message':str(sub_location),'status':200})
     
     except Exception as e:
         return jsonify({'message':str(e), 'status':400})
