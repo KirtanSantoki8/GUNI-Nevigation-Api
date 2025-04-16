@@ -135,7 +135,7 @@ def get_sub_locations():
             return jsonify({'message':list(list('No sub locations found')),'status':400})
     
     except Exception as e:
-        return jsonify({'message':str(e), 'status':400})
+        return jsonify({'message':list(list(str(e))), 'status':400})
 
 if __name__ == '__main__':
     createTables()
