@@ -38,9 +38,11 @@ def createTables():
                 main_location_name VARCHAR(255) NOT NULL,
                 sub_location_thumbnail VARCHAR(255) NOT NULL,
                 sub_location_name VARCHAR(255) NOT NULL,
+                longitude VARCHAR(255) NOT NULL,
+                latitude VARCHAR(255) NOT NULL,
                 date_of_sub_location_creation DATE NOT NULL
                 )
             ''')
-    # cur.execute('''DROP TABLE IF EXISTS location_details''')
+    # cur.execute('''DROP TABLE IF EXISTS sub_locations''')
     conn.commit()    
     conn.close()
