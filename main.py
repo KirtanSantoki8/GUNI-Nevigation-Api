@@ -111,11 +111,13 @@ def upload_sub_places():
         image_data = image.read()
         name = request.form['subLocation']
         mainLocation = request.form['mainLocation']
+        description = request.form['description']
+        phone_no = request.form['phone_no']
         longitude = request.form['longitude']
         latitude = request.form['latitude']
 
         thumbnail = getImage(image_data)
-        sub_location = uploadSubPlaces(str(thumbnail),name,mainLocation,longitude,latitude)
+        sub_location = uploadSubPlaces(str(thumbnail),name,mainLocation,description,phone_no,longitude,latitude)
 
         return jsonify({'message':str(sub_location),'status':200})
     

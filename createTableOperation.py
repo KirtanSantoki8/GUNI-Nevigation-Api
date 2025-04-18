@@ -38,6 +38,8 @@ def createTables():
                 main_location_name VARCHAR(255) NOT NULL,
                 sub_location_thumbnail VARCHAR(255) NOT NULL,
                 sub_location_name VARCHAR(255) NOT NULL,
+                sub_location_description VARCHAR(255) NOT NULL,
+                sub_location_phone_no VARCHAR(255) NOT NULL,
                 longitude VARCHAR(255) NOT NULL,
                 latitude VARCHAR(255) NOT NULL,
                 date_of_sub_location_creation DATE NOT NULL

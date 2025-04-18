@@ -10,12 +10,12 @@ def getAllMainLocations():
     conn.close()
     return locations
 
-def uploadSubPlaces(image,name,mainLocation,longitude,latitude):
+def uploadSubPlaces(image,name,mainLocation,description,phone_no,longitude,latitude):
     conn = sqlite3.connect('GUNI Nevigation.db')
     cur = conn.cursor()
     sub_location_id = str(uuid.uuid4())
     dateOfCreation = date.today()
-    cur.execute('''INSERT INTO sub_locations (sub_location_id,main_location_name,sub_location_thumbnail,sub_location_name,longitude,latitude,date_of_sub_location_creation) VALUES (?,?,?,?,?,?,?)''',(sub_location_id,mainLocation,image,name,longitude,latitude,dateOfCreation))
+    cur.execute('''INSERT INTO sub_locations (sub_location_id,main_location_name,sub_location_thumbnail,sub_location_name,sub_location_description,sub_location_phone_no,longitude,latitude,date_of_sub_location_creation) VALUES (?,?,?,?,?,?,?,?,?)''',(sub_location_id,mainLocation,image,name,description,phone_no,longitude,latitude,dateOfCreation))
     conn.commit()
     conn.close()
 
