@@ -8,6 +8,7 @@ from allLocation import addLocation , getAllLocation , writeMainLocation
 from imageToUrl import getImage
 from allSubLocations import getAllMainLocations , uploadSubPlaces , getSubLocations
 from dashboard import location_categry, total_sub_locations, category_wise_sub_location
+from updateData import update_location_info
 
 app = Flask(__name__)
 
@@ -154,6 +155,28 @@ def dashboard():
             'status':200
         })
     
+    except Exception as e:
+        return jsonify({'message':str(e), 'status':400})
+    
+@app.route('/updateLocationCategory',methods=['POST'])
+def update_location_category():
+    try:
+        old_name = request.form['old_name']
+        new_name = request.form.get('new_name')
+        new_thumbnail = request.files.get('new_thumbnail')
+        thumbnail = None
+
+        if new_thumbnail:
+            image_data = new_thumbnail.read()
+            thumbnail = str(getImage(image_data))
+
+        if new_name is None and new_thumbnail is None:
+            return jsonify({'message': 'No new data provided for update', 'status': 400})
+        
+        update_location_info(old_name, new_name=new_name, new_thumbnail=thumbnail)
+
+        return jsonify({'message': 'Location category updated successfully', 'status': 200})
+
     except Exception as e:
         return jsonify({'message':str(e), 'status':400})
 
