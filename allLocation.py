@@ -3,7 +3,7 @@ import uuid
 from datetime import date
 
 def addLocation(image,name):
-    conn = sqlite3.connect('GUNI Nevigation.db')
+    conn = sqlite3.connect('GUNI Navigation.db')
     cur = conn.cursor()
     location_id = str(uuid.uuid4())
     dateOfCreation = date.today()
@@ -12,7 +12,7 @@ def addLocation(image,name):
     conn.close()
 
 def getAllLocation():
-    conn = sqlite3.connect('GUNI Nevigation.db')
+    conn = sqlite3.connect('GUNI Navigation.db')
     cur = conn.cursor()
     cur.execute('''SELECT * FROM location''')
     locations = cur.fetchall()
@@ -20,7 +20,7 @@ def getAllLocation():
     return locations
 
 def writeMainLocation(name):
-    conn = sqlite3.connect('GUNI Nevigation.db')
+    conn = sqlite3.connect('GUNI Navigation.db')
     cur = conn.cursor()
     cur.execute('''INSERT INTO main_locations (main_location_names) VALUES (?)''',(name,))
     conn.commit()

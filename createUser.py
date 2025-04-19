@@ -3,7 +3,7 @@ import uuid
 from datetime import date
 
 def createUser(name,email,password,phone_no):
-    conn = sqlite3.connect('GUNI Nevigation.db')
+    conn = sqlite3.connect('GUNI Navigation.db')
     cur = conn.cursor()
     user_id = str(uuid.uuid4())
     dateOfCreation = date.today()

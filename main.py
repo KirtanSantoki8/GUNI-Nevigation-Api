@@ -7,6 +7,7 @@ from loginAdmin import loginAdmin
 from allLocation import addLocation , getAllLocation , writeMainLocation
 from imageToUrl import getImage
 from allSubLocations import getAllMainLocations , uploadSubPlaces , getSubLocations
+from dashboard import location_categry, total_sub_locations, category_wise_sub_location
 
 app = Flask(__name__)
 
@@ -135,6 +136,23 @@ def get_sub_locations():
             return jsonify({'message':subLocations,'status':200})
         else:
             return jsonify({'message':'No sub locations found','status':400})
+    
+    except Exception as e:
+        return jsonify({'message':str(e), 'status':400})
+    
+@app.route('/dashboard',methods=['GET'])
+def dashboard():
+    try:
+        location_count = location_categry()
+        sub_location_count = total_sub_locations()
+        category_wise_sub_location_data = category_wise_sub_location()
+
+        return jsonify({
+            'location_count':location_count,
+            'sub_location_count':sub_location_count,
+            'category_wise_sub_location_data':category_wise_sub_location_data,
+            'status':200
+        })
     
     except Exception as e:
         return jsonify({'message':str(e), 'status':400})

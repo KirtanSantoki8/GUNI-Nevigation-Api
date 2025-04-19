@@ -1,7 +1,7 @@
 import sqlite3
 
 def createTables():
-    conn = sqlite3.connect('GUNI Nevigation.db')
+    conn = sqlite3.connect('GUNI Navigation.db')
     cur = conn.cursor()
     cur.execute('''CREATE TABLE IF NOT EXISTS users (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
