@@ -8,6 +8,7 @@ from imageToUrl import getImage
 from allSubLocations import getAllMainLocations , uploadSubPlaces , getSubLocations
 from dashboard import location_categry, total_sub_locations, category_wise_sub_location
 from updateData import update_location_info
+from deleteData import delete_location_cateory
 
 app = Flask(__name__)
 
@@ -206,6 +207,17 @@ def get_specific_location():
     
     except Exception as e:
         return jsonify({'message':str(e), 'status':400})
+    
+@app.route('/deleteLocationCategory', methods=['POST'])
+def delete_location_category():
+    try:
+        location = request.form['location']
+        delete_location_cateory(location)
+        
+        return jsonify({'message': 'Location category deleted successfully', 'status': 200})
+    
+    except Exception as e:
+        return jsonify({'message': str(e), 'status': 400})
 
 if __name__ == '__main__':
     createTables()
