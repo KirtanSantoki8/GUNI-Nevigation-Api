@@ -180,7 +180,7 @@ def update_location_category():
         return jsonify({'message':str(e), 'status':400})
     
 @app.route('/getSpecificLocation',methods=['POST'])
-def get_all_location():
+def get_specific_location():
     try:
         location_name = request.form['location_name']
 
