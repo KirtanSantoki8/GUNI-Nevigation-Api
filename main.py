@@ -179,17 +179,28 @@ def update_location_category():
     except Exception as e:
         return jsonify({'message':str(e), 'status':400})
     
-@app.route('/getSpecificLocation',methods=['POST'])
+@app.route('/getSpecificLocation', methods=['POST'])
 def get_specific_location():
     try:
         location_name = request.form['location_name']
-
         locations = getSpecificLocation(location_name)
         
         if locations:
-            return jsonify({'message':locations,'status':200})
+            location_dicts = [
+                {
+                    "id": loc[0],
+                    "uid": loc[1],
+                    "imageUrl": loc[2],
+                    "name": loc[3],
+                    "date": loc[4]
+                }
+                for loc in locations
+            ]
+            return jsonify({'message': location_dicts, 'status': 200})
         else:
-            return jsonify({'message':'No locations found','status':400})
+            return jsonify({'message': 'No locations found', 'status': 400})
+    except Exception as e:
+        return jsonify({'message': str(e), 'status': 500})
     
     except Exception as e:
         return jsonify({'message':str(e), 'status':400})
