@@ -25,3 +25,11 @@ def writeMainLocation(name):
     cur.execute('''INSERT INTO main_locations (main_location_names) VALUES (?)''',(name,))
     conn.commit()
     conn.close()
+
+def getSpecificLocation(name):
+    conn = sqlite3.connect('GUNI Navigation.db')
+    cur = conn.cursor()
+    cur.execute('''SELECT * FROM location where location = ?''',(name,))
+    location = cur.fetchall()
+    conn.close()
+    return location

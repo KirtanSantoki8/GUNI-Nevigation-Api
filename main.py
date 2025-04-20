@@ -2,9 +2,8 @@ from flask import Flask , jsonify , request
 from createTableOperation import createTables
 from createUser import createUser
 from loginUser import loginUser
-from createAdmin import createAdmin
 from loginAdmin import loginAdmin
-from allLocation import addLocation , getAllLocation , writeMainLocation
+from allLocation import addLocation , getAllLocation , writeMainLocation, getSpecificLocation
 from imageToUrl import getImage
 from allSubLocations import getAllMainLocations , uploadSubPlaces , getSubLocations
 from dashboard import location_categry, total_sub_locations, category_wise_sub_location
@@ -177,6 +176,21 @@ def update_location_category():
 
         return jsonify({'message': 'Location category updated successfully', 'status': 200})
 
+    except Exception as e:
+        return jsonify({'message':str(e), 'status':400})
+    
+@app.route('/getSpecificLocation',methods=['POST'])
+def get_all_location():
+    try:
+        location_name = request.form['location_name']
+
+        locations = getSpecificLocation(location_name)
+        
+        if locations:
+            return jsonify({'message':locations,'status':200})
+        else:
+            return jsonify({'message':'No locations found','status':400})
+    
     except Exception as e:
         return jsonify({'message':str(e), 'status':400})
 
