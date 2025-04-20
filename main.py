@@ -157,7 +157,7 @@ def dashboard():
     except Exception as e:
         return jsonify({'message':str(e), 'status':400})
     
-@app.route('/updateLocationCategory',methods=['POST'])
+@app.route('/updateLocationCategory', methods=['POST'])
 def update_location_category():
     try:
         old_name = request.form['old_name']
@@ -171,13 +171,13 @@ def update_location_category():
 
         if new_name is None and new_thumbnail is None:
             return jsonify({'message': 'No new data provided for update', 'status': 400})
-        
+
         update_location_info(old_name, new_name=new_name, new_thumbnail=thumbnail)
 
         return jsonify({'message': 'Location category updated successfully', 'status': 200})
 
     except Exception as e:
-        return jsonify({'message':str(e), 'status':400})
+        return jsonify({'message': str(e), 'status': 400})
     
 @app.route('/getSpecificLocation', methods=['POST'])
 def get_specific_location():
