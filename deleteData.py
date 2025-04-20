@@ -6,6 +6,7 @@ def delete_location_cateory(location):
         cursor = conn.cursor()
         
         cursor.execute("DELETE FROM location WHERE location = ?", (location,))
+        cursor.execute("DELETE FROM main_locations WHERE main_location_names = ?", (location,))
         
         conn.commit()
         conn.close()
