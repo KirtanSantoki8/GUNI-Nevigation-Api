@@ -198,7 +198,7 @@ def get_specific_location():
             ]
             return jsonify({'message': location_dicts, 'status': 200})
         else:
-            return jsonify({'message': 'No locations found', 'status': 400})
+            return jsonify({'message': [], 'status': 200})
     except Exception as e:
         return jsonify({'message': str(e), 'status': 500})
     
