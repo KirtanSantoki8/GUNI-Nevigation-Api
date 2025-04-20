@@ -5,7 +5,7 @@ def delete_location_cateory(location):
         conn = sqlite3.connect('database.db')
         cursor = conn.cursor()
         
-        cursor.execute("DELETE FROM locations WHERE location = ?", (location,))
+        cursor.execute("DELETE FROM location WHERE location = ?", (location,))
         
         conn.commit()
         conn.close()
