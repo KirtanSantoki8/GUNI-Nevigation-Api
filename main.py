@@ -161,7 +161,7 @@ def dashboard():
 def update_location_category():
     try:
         old_name = request.form['old_name']
-        new_thumbnail = request.files.get('new_thumbnail')
+        new_thumbnail = request.files.get('image')
         new_name = request.form.get('new_name')
         thumbnail = None
         print(new_thumbnail)
