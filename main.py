@@ -168,6 +168,7 @@ def update_location_category():
         if new_thumbnail:
             image_data = new_thumbnail.read()
             thumbnail = str(getImage(image_data))
+            print(thumbnail)
 
         if new_name is None and new_thumbnail is None:
             return jsonify({'message': 'No new data provided for update', 'status': 400})
