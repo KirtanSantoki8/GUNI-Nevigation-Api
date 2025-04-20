@@ -2,7 +2,7 @@ import sqlite3
 
 def delete_location_cateory(location):
     try:
-        conn = sqlite3.connect('database.db')
+        conn = sqlite3.connect('GUNI Navigation.db')
         cursor = conn.cursor()
         
         cursor.execute("DELETE FROM location WHERE location = ?", (location,))
