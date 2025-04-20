@@ -164,6 +164,7 @@ def update_location_category():
         new_name = request.form.get('new_name')
         new_thumbnail = request.files.get('new_thumbnail')
         thumbnail = None
+        print(new_thumbnail)
 
         if new_thumbnail:
             image_data = new_thumbnail.read()
