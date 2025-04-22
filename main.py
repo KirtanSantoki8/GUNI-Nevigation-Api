@@ -5,10 +5,12 @@ from loginUser import loginUser
 from loginAdmin import loginAdmin
 from allLocation import addLocation , getAllLocation , writeMainLocation, getSpecificLocation
 from imageToUrl import getImage
-from allSubLocations import getAllMainLocations , uploadSubPlaces , getSubLocations
+from allSubLocations import getAllMainLocations , uploadSubPlaces , getSubLocations, getSpecificSubLocation
 from dashboard import location_categry, total_sub_locations, category_wise_sub_location
-from updateData import update_location_info
-from deleteData import delete_location_cateory
+from updateCategoryData import update_location_info
+from deleteCategoryData import delete_location_cateory
+from updateSubLocationData import update_sub_location_info
+from deleteSubLocationData import delete_sub_location_data
 
 app = Flask(__name__)
 
@@ -216,6 +218,60 @@ def delete_location_category():
         
         return jsonify({'message': 'Location category deleted successfully', 'status': 200})
     
+    except Exception as e:
+        return jsonify({'message': str(e), 'status': 400})
+    
+@app.route('/updateSubLocation', methods=['POST'])
+def update_sub_location():
+    try:
+        old_name = request.form['old_name']
+        main_location_name = request.form.get('main_location_name')
+        sub_location_thumbnail = request.files.get('image')
+        sub_location_name = request.form.get('sub_location_name')
+        sub_location_description = request.form.get('sub_location_description')
+        sub_location_phone_no = request.form.get('sub_location_phone_no')
+        longitude = request.form.get('longitude')
+        latitude = request.form.get('latitude')
+
+        thumbnail = None
+        if sub_location_thumbnail:
+            image_data = sub_location_thumbnail.read()
+            thumbnail = str(getImage(image_data))
+
+        update_sub_location_info(
+            old_name,
+            main_location_name=main_location_name,
+            sub_location_thumbnail=thumbnail,
+            sub_location_name=sub_location_name,
+            sub_location_description=sub_location_description,
+            sub_location_phone_no=sub_location_phone_no,
+            longitude=longitude,
+            latitude=latitude
+        )
+
+        return jsonify({'message': 'Sub-location updated successfully', 'status': 200})
+
+    except Exception as e:
+        return jsonify({'message': str(e), 'status': 400})
+    
+@app.route('/deleteSubLocation', methods=['POST'])
+def delete_sub_location():
+    try:
+        sub_location_name = request.form['sub_location_name']
+        delete_sub_location_data(sub_location_name)
+        
+        return jsonify({'message': 'Sub-location deleted successfully', 'status': 200})
+    
+    except Exception as e:
+        return jsonify({'message': str(e), 'status': 400})
+    
+@app.route('/getSpecificSubLocation', methods=['POST'])
+def get_specific_sub_location():
+    try:
+        name = request.form['name']
+        location = getSpecificSubLocation(name)
+
+        return jsonify({'message': location, 'status': 200})
     except Exception as e:
         return jsonify({'message': str(e), 'status': 400})
 

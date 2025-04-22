@@ -26,3 +26,11 @@ def getSubLocations(mainLocation):
     locations = cur.fetchall()
     conn.close()
     return locations
+
+def getSpecificSubLocation(name):
+    conn = sqlite3.connect('GUNI Navigation.db')
+    cur = conn.cursor()
+    cur.execute('''SELECT * FROM sub_locations where sub_location_name = ?''',(name,))
+    location = cur.fetchall()
+    conn.close()
+    return location
