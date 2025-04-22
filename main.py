@@ -275,7 +275,7 @@ def get_specific_sub_location():
     except Exception as e:
         return jsonify({'message': str(e), 'status': 400})
     
-@app.route('/getCategoryWiseLocation', methods=['POST'])
+@app.route('/getCategoryWiseLocationCount', methods=['POST'])
 def get_category_wise_location():
     try:
         category = request.form['category']
@@ -283,6 +283,19 @@ def get_category_wise_location():
 
         return jsonify({
             'category_wise_sub_location_data':locations,
+            'status':200
+        })
+    except Exception as e:
+        return jsonify({'message': str(e), 'status': 400})
+    
+@app.route('/getCategoryWiseLocations', methods=['POST'])
+def get_category_wise_locations():
+    try:
+        category = request.form['category']
+        locations = getSubLocations(category)
+
+        return jsonify({
+            'message':locations,
             'status':200
         })
     except Exception as e:
