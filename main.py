@@ -5,7 +5,7 @@ from loginUser import loginUser
 from loginAdmin import loginAdmin
 from allLocation import addLocation , getAllLocation , writeMainLocation, getSpecificLocation
 from imageToUrl import getImage
-from allSubLocations import getAllMainLocations , uploadSubPlaces , getSubLocations, getSpecificSubLocation
+from allSubLocations import getAllMainLocations , uploadSubPlaces , getSubLocations, getSpecificSubLocation, getSubLocationCount
 from dashboard import location_categry, total_sub_locations, category_wise_sub_location
 from updateCategoryData import update_location_info
 from deleteCategoryData import delete_location_cateory
@@ -272,6 +272,19 @@ def get_specific_sub_location():
         location = getSpecificSubLocation(name)
 
         return jsonify({'message': location, 'status': 200})
+    except Exception as e:
+        return jsonify({'message': str(e), 'status': 400})
+    
+@app.route('/getCategoryWiseLocation', methods=['POST'])
+def get_category_wise_location():
+    try:
+        category = request.form['category']
+        locations = getSubLocationCount(category)
+
+        return jsonify({
+            'category_wise_sub_location_data':locations,
+            'status':200
+        })
     except Exception as e:
         return jsonify({'message': str(e), 'status': 400})
 
