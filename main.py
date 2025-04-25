@@ -271,7 +271,25 @@ def get_specific_sub_location():
         name = request.form['name']
         location = getSpecificSubLocation(name)
 
-        return jsonify({'message': location, 'status': 200})
+        if location:
+            location_dicts = [
+                {
+                    "id": loc[0],
+                    "uid": loc[1],
+                    "mainLocation": loc[2],
+                    "imageUrl": loc[3],
+                    "name": loc[4],
+                    "description": loc[5],
+                    "phone_no": loc[6],
+                    "longitude": loc[7],
+                    "latitude": loc[8],
+                    "date": loc[9]
+                }
+                for loc in location
+            ]
+            return jsonify({'message': location_dicts, 'status': 200})
+        else:
+            return jsonify({'message': [], 'status': 200})
     except Exception as e:
         return jsonify({'message': str(e), 'status': 400})
     
