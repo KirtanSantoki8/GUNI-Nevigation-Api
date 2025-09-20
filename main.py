@@ -1,7 +1,6 @@
 from flask import Flask , jsonify , request
 from createTableOperation import createTables
 from createUser import createUser
-from loginUser import loginUser
 from loginAdmin import loginAdmin
 from allLocation import addLocation , getAllLocation , writeMainLocation, getSpecificLocation
 from imageToUrl import getImage
