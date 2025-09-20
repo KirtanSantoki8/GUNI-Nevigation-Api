@@ -3,16 +3,6 @@ import sqlite3
 def createTables():
     conn = sqlite3.connect('GUNI Navigation.db')
     cur = conn.cursor()
-    cur.execute('''CREATE TABLE IF NOT EXISTS users (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                user_id VARCHAR(255) NOT NULL,
-                name VARCHAR(255) NOT NULL,
-                email VARCHAR(255) NOT NULL,
-                password VARCHAR(255) NOT NULL,
-                phone_no VARCHAR(255) NOT NULL,
-                date_of_account_creation DATE NOT NULL
-                )
-            ''')
     cur.execute('''CREATE TABLE IF NOT EXISTS admin (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name VARCHAR(255) NOT NULL,

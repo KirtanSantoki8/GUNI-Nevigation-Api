@@ -17,37 +17,6 @@ app = Flask(__name__)
 @app.route('/')
 def test_api():
     return 'Welcome to GUNI Navigation'
-
-@app.route('/createUser',methods=['POST'])
-def create_user():
-    try:
-        name = request.form['name']
-        email = request.form['email']
-        password = request.form['password']
-        phone_no = request.form['phone_no']
-
-        user_id = createUser(name=name,email=email,password=password,phone_no=phone_no)
-        
-        return jsonify({'message':str(user_id),'status':200})
-    
-    except Exception as e:
-        return jsonify({'message':str(e), 'status':400})
-    
-@app.route('/login',methods=['POST'])
-def login():
-    try:
-        email = request.form['email']
-        password = request.form['password']
-
-        user = loginUser(email,password)
-        
-        if user:
-            return jsonify({'message':user[1],'status':200})
-        else:
-            return jsonify({'message':'Invalid credentials','status':400})
-    
-    except Exception as e:
-        return jsonify({'message':str(e), 'status':400})
     
 @app.route('/loginAdmin',methods=['POST'])
 def login_admin():
