@@ -4,7 +4,7 @@ from createUser import createUser
 from loginAdmin import loginAdmin
 from allLocation import addLocation , getAllLocation , writeMainLocation, getSpecificLocation
 from imageToUrl import getImage
-from allSubLocations import getAllMainLocations , uploadSubPlaces , getSubLocations, getSpecificSubLocation, getSubLocationCount
+from allSubLocations import getAllMainLocations, getAllSubLocations , uploadSubPlaces , getSubLocations, getSpecificSubLocation, getSubLocationCount
 from dashboard import location_categry, total_sub_locations, category_wise_sub_location
 from updateCategoryData import update_location_info
 from deleteCategoryData import delete_location_cateory
@@ -96,6 +96,19 @@ def upload_sub_places():
     except Exception as e:
         return jsonify({'message':str(e), 'status':400})
     
+@app.route('/getAllSubLocations',methods=['GET'])
+def get_all_sub_locations():
+    try:
+        subLocations = getAllSubLocations()
+
+        if subLocations:
+            return jsonify({'message':subLocations,'status':200})
+        else:
+            return jsonify({'message':'No sub locations found','status':400})
+
+    except Exception as e:
+        return jsonify({'message':str(e), 'status':400})
+
 @app.route('/getSubLocations',methods=['POST'])
 def get_sub_locations():
     try:

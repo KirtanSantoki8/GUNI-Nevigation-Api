@@ -19,6 +19,14 @@ def uploadSubPlaces(image,name,mainLocation,description,phone_no,longitude,latit
     conn.commit()
     conn.close()
 
+def getAllSubLocations():
+    conn = sqlite3.connect('GUNI Navigation.db')
+    cur = conn.cursor()
+    cur.execute('''SELECT * FROM sub_locations''')
+    locations = cur.fetchall()
+    conn.close()
+    return locations
+
 def getSubLocations(mainLocation):
     conn = sqlite3.connect('GUNI Navigation.db')
     cur = conn.cursor()
