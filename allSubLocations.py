@@ -25,7 +25,7 @@ def getAllSubLocations():
     cur.execute('''SELECT * FROM sub_locations''')
     locations = cur.fetchall()
     conn.close()
-    return sorted(locations, key=lambda x: x[3])
+    return sorted([loc[4] for loc in locations])
 
 def getSubLocations(mainLocation):
     conn = sqlite3.connect('GUNI Navigation.db')
